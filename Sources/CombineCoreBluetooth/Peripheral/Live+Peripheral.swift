@@ -264,6 +264,11 @@ extension Peripheral {
 
     @PassthroughBacked var didUpdateValueForCharacteristic: AnyPublisher<(CBCharacteristic, Error?), Never>
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if characteristic.uuid == CBUUID(string: "0000FF51-1212-ABCD-1523-785FEABCD123") {
+            let timeInterval: TimeInterval = Date().timeIntervalSince1970
+            let millisecond = CLongLong(round(timeInterval*1000))
+            print("[HR]-\(millisecond)")
+        }
       _didUpdateValueForCharacteristic.send((characteristic, error))
     }
 
